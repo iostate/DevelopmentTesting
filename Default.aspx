@@ -45,17 +45,7 @@
 }
             </style>
     </head>
-    <script type="text/javascript" language="javascript">
-      function ChangeHiddenValue()
-      {
-         alert("Entering ChangeHiddenValue");
-         var hdnId = "<%=hdnSecretValue.ClientID%>";
-         var hdn = document.getElementById(hdnId);
-         var txt = document.getElementById("txtSecretValue");
-         hdn.value = txt.value;
-         alert("Value changed");
-      }
-    </script>
+ 
     <div class="jumbotron">
         <h1>ASP.NET</h1>
         <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
@@ -94,66 +84,62 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <!-- Default checkbox -->
-            <div class="checkbox">
-              <label>
-               <input type="checkbox" value="">
-               <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-               Option one
-               </label>
-            </div>
-
-            <!-- Checked checkbox -->
-            <div class="checkbox">
-              <label>
-               <input type="checkbox" value="" checked>
-               <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-               Option two is checked by default
-               </label>
-            </div>
-
-            <!-- Disabled checkbox -->
-            <div class="checkbox disabled">
-              <label>
-               <input type="checkbox" value="" disabled>
-               <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-               Option three is disabled
-               </label>
-            </div>
-    </div>
+        </div>
     <div class="col-md-6">
-        <div class="form-check">
-            <label>
-            <input class="form-check-input form-check-inline" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label form-check-inline" for="defaultCheck1">
-            Default checkbox
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-            <label class="form-check-label" for="defaultCheck2">
-            Disabled checkbox
-            </label>
-        </div>
-    </div>
-
-
+    </div
     </div>
     <div class="row">
-        <form id="form1" runat="server">
-            <div class="col-md-6">
-                <asp:HiddenField ID="hdnSecretValue" runat="server" OnValueChanged="hdnSecretValue_ValueChanged" />
+        <div class="col-md-6">
+            <form id="form1" runat="server">
+                <asp:HiddenField ID="HiddenField1" runat="server"/>
                 Enter secret value:
-                <asp:TextBox ID="txtSecretValue" runat="server" />
+                <asp:TextBox ID="TextBox1" runat="server" />
                 <br />
                 <br />
-                <input id="Button1" type="button" value="button" onclick="ChangeHiddenValue()" />
+                <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
                 <br />
-                <br />
-                <asp:Label ID="lblSecretValue" runat="server" />
-            </div>
+                &nbsp;
+                <asp:Label ID="Label1" runat="server" />
+                &nbsp
             </form>
-        <div class="col-md-6"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="btn-group">
+                <select id="contactedAt" runat="server" onchange="printOptions(this);">
+                    <option ID="radNone" value="None">None</option>
+                    <option ID="radMR" value="mr">Mr.</option>
+                    <option ID="radMRS" value="mrs">Mrs.</option>
+                    <option ID="radLM" value="leftMessage">Left Message</option>
+                    <option ID="radEML" value="sendEmail">Send Email</option>
+                </select>
+            </div>
+            <div id="resultDiv">
+
+            </div>
+        </div>
     </div>
+
+       <script type="text/javascript" language="javascript">
+           var select = document.getElementById('contactedAt');
+           //console.log(select.options[select.selectedIndex]);
+           var val = select.value;
+           console.log(select.textContent);
+
+           var resultDiv = document.getElementById('resultDiv');
+           resultDiv.innerHTML = val;
+
+           function printOptions(sel) {
+               alert(sel.options[sel.selectedIndex].text);
+           }
+        <%-- function ChangeHiddenValue()
+     {
+         alert("Entering ChangeHiddenValue");
+         var hdnId = "<%=hdnSecretValue.ClientID%>";
+         var hdn = document.getElementById(hdnId);
+         var txt = document.getElementById("txtSecretValue");
+         hdn.value = txt.value;
+         alert("Value changed");
+      }--%>
+       </script>
 
 </asp:Content>
