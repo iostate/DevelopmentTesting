@@ -44,6 +44,16 @@
   opacity: .5;
 }
             </style>
+
+        <script type="text/javascript">
+            
+
+            function SaveWithParameter(parameter) {
+                __doPostBack('btnSave', parameter)
+            }
+
+            
+        </script>
     </head>
  
     <div class="jumbotron">
@@ -89,7 +99,7 @@
     </div
     </div>
     <div class="row">
-        <div class="col-md-6">
+       <%-- <div class="col-md-6">
             <form id="form1" runat="server">
                 <asp:HiddenField ID="HiddenField1" runat="server"/>
                 Enter secret value:
@@ -101,8 +111,24 @@
                 &nbsp;
                 <asp:Label ID="Label1" runat="server" />
                 &nbsp
-            </form>
+              
+            
+        </div>--%>
+        <form id="form1" runat="server">
+
+        <div class="col-md-6">
+            <asp:LinkButton ID="LinkButton1" runat="server" />
+               
+            <input type="button" id="Button45" name="Button45" onclick="javascript:__doPostBack('ButtonA', 'test1')" value="clicking this will run ButtonA.Click Event Handler" /><br /><br />
+            <input type="button" id="Button46" name="Button46" onclick="javascript:__doPostBack('ButtonB', 'test2')" value="clicking this will run ButtonB.Click Event Handler" /><br /><br />
+
+
+            <input type="button" id="btnSave" onclick="javascript:SaveWithParameter('Hello Quan')" value="click me" />
         </div>
+        
+        
+        </div>
+    <div class="row">
         <div class="col-md-6">
             <div class="btn-group">
                 <select id="contactedAt" runat="server" onchange="printOptions(this);">
@@ -113,33 +139,82 @@
                     <option ID="radEML" value="sendEmail">Send Email</option>
                 </select>
             </div>
-            <div id="resultDiv">
-
             </div>
+        <div class="col-md-6">
+            
         </div>
-    </div>
+        </div>
+   
+        <div class="row"">
+            <div class="col-md-6">
+            
+                    <select id="countries" name="countries" class="countries">
+                        <option value="alaska" name="alaska">Alaska</option>
+                        <option value="arizona" name="arizona">Arizona</option>
+                        <option value="california" name="california">California</option>
+                        <option value="conneticut" name="conneticut">Conneticut</option>
+                        <option value="delaware" name="delaware">Delaware</option>
+                    </select>
+
+                    <asp:HiddenField ID="HiddenField1" runat="server"/>
+              
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+    </form>
 
        <script type="text/javascript" language="javascript">
-           var select = document.getElementById('contactedAt');
+           //var select = document.getElementById('contactedAt');
            //console.log(select.options[select.selectedIndex]);
-           var val = select.value;
-           console.log(select.textContent);
+           //var val = select.value;
+           //console.log(select.textContent);
 
-           var resultDiv = document.getElementById('resultDiv');
-           resultDiv.innerHTML = val;
+           //var resultDiv = document.getElementById('resultDiv');
+           //resultDiv.innerHTML = val;
 
            function printOptions(sel) {
                alert(sel.options[sel.selectedIndex].text);
            }
-        <%-- function ChangeHiddenValue()
-     {
-         alert("Entering ChangeHiddenValue");
-         var hdnId = "<%=hdnSecretValue.ClientID%>";
-         var hdn = document.getElementById(hdnId);
-         var txt = document.getElementById("txtSecretValue");
-         hdn.value = txt.value;
-         alert("Value changed");
-      }--%>
+
+           //function __doPostBack(eventTarget, eventArgument) {
+           //    if (theForm.onsubmit || (theForm.onsubmit() != false)) {
+           //        theForm.__EVENTTARGET.value = eventTarget;
+           //        theForm.__EVENTARGUMENT.value = eventArgument;
+           //        theForm.submit();
+           //    }
+           //}
+
+           //$(document).ready(function () {
+           //    // event handler every time the select#countries changes
+           //    $('#countries').change(function () {
+           //        var selectedCountry = $(this).children("option:selected").val();
+           //        alert("You have selected the country - " + selectedCountry);
+
+           //    });
+           //});
+
+           $("#countries").change(function () {
+
+               // prints every state because there's no selector for just the selected option
+               var testStr = $(this).text();
+               console.log('testString = ' + testStr + ' = testString');
+               var str = "";
+               $("#countries option:selected").each(function () {
+                   // get the value of the selected country, then write to console
+                   str += $(this).text() + " ";
+                   console.log(str);
+                   // write the country to hidden field
+
+                   // in VB, pull the hidden data out
+
+                   // include separators to separate the items in the hidden field
+
+                   // parse using .pop() 
+
+                   // use a stack?? 
+               });
+           });
+ 
        </script>
 
 </asp:Content>
